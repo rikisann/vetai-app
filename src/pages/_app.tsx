@@ -8,13 +8,15 @@ import Head from "next/head";
 import { type ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const nonAuthPaths = ["/public", "/api", "/"]
+const nonAuthPaths = ["/public", "/api/auth"]
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   const pathname = usePathname()
+
+  const pathInNonAuthPaths = nonAuthPaths.some((path) => pathname.startsWith(path))
 
   const MainComponent = <div className="min-h-screen mx-auto flex-grow container"  >
     <Component {...pageProps} />
@@ -31,7 +33,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex bg-gray-600 text-white">
-        {nonAuthPaths.includes(pathname) ?
+        {pathInNonAuthPaths ?
           MainComponent
           :
           <Auth>
