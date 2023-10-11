@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import SideNav from "~/components/SideNav";
 import Head from "next/head";
-import { ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 const nonAuthPaths = ["/public", "/api"]
@@ -51,8 +51,8 @@ function Auth({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (status === "loading") return
-    if (!isUser) signIn()
-  }, [isUser])
+    if (!isUser) void signIn()
+  }, [isUser, status])
 
   if (isUser) {
     return children

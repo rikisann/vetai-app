@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from "next";
+import type { GetServerSidePropsContext } from "next";
 import Chat from "~/components/Chat";
 import { getServerAuthSession } from "~/server/auth";
 import { ssgHelper } from "~/server/api/ssgHelper";

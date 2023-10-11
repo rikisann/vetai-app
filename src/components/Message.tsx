@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { BiSolidUser } from "react-icons/bi"
 import { FaUserDoctor } from "react-icons/fa6"
 

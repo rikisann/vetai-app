@@ -6,7 +6,7 @@ import {
     useEffect,
     useState,
     useRef,
-    ChangeEvent,
+    type ChangeEvent,
 } from "react";
 
 type InputProps = {
@@ -32,7 +32,7 @@ function updateTextAreaSize(textArea?: HTMLTextAreaElement) {
 function attachEnterKeyListener(
     formRef: RefObject<HTMLFormElement> | undefined
 ) {
-    if (formRef && formRef.current) {
+    if (formRef?.current) {
         formRef.current.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.key === "Enter") {
                 event.preventDefault();
@@ -83,7 +83,7 @@ export default function Input({
             {...props}
             style={{ height: 0 }}
             ref={inputRef}
-            value={props.value || inputValue}
+            value={props.value ?? inputValue}
             className={`resize-none overflow-hidden rounded-md bg-black px-4 py-4 text-white drop-shadow-2xl focus:outline-none ${className}`}
             onChange={updateInputValue}
         />
