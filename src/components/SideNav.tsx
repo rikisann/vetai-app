@@ -15,7 +15,7 @@ const SideNav = () => {
                 <Link className="text-center bg-gray-600 hover:bg-gray-400 transition-colors duration-200 hover:text-black" href="/">
                     <h1 className=" p-2 border rounded-md ">New Chat</h1>
                 </Link>
-                {chats?.length === 0 || !chats && <p className="whitespace-normal text-gray-300">Start a new chat by sending a message!</p>}
+                {(chats?.length === 0 || !chats) && <p className="whitespace-normal text-gray-300">Start a new chat by sending a message!</p>}
                 {chats?.length !== 0 && chats?.map(({ id, name }) =>
                     <li key={id}>
                         <Link className="flex items-center gap-4" href={`/chat/${id}`}>

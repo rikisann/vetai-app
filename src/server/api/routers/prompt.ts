@@ -15,7 +15,7 @@ export const promptRouter = createTRPCRouter({
         chatHistory: z.array(z.object({ question: z.string(), response: z.string() })).optional()
     })).mutation(async ({ input: { question, chatId, chatHistory }, ctx }) => {
         const currentUserId = ctx.session.user.id;
-        console.log(chatHistory)
+
         const formattedChatHistory = chatHistory ? chatHistory?.reduce((acc, { question, response }) => acc += `${question}\n${response}\n`, "") : ""
 
         const { text: response }: { text?: string } = await runLlm(question, formattedChatHistory)
