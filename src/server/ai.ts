@@ -28,7 +28,7 @@ const runLlm = async (question: string, chatHistory: string = "") => {
         new OpenAIEmbeddings(),
         { pineconeIndex }
     );
-
+    console.log(chatHistory)
     const model = new ChatOpenAI()
 
     const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), { returnSourceDocuments: true, questionGeneratorChainOptions: { template: TEMPLATE } })
