@@ -23,7 +23,7 @@ Chat history: {chat_history}
 Question: {question}
 Helpful Answer:`
 
-const runLlm = async (question: string, chatHistory: string = "") => {
+const runLlm = async (question: string, chatHistory = "") => {
     const vectorStore = await PineconeStore.fromExistingIndex(
         new OpenAIEmbeddings(),
         { pineconeIndex }
