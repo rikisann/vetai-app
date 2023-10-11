@@ -13,7 +13,7 @@ interface Props {
 
 let idCounter = 0
 
-// INTEGRATE MEMORY AND APPLY NICE FONT AND SUBMIT ON ENTER - REMEMBER TO SWITCH TO TESTING BRANCH YUP
+// INTEGRATE MEMORY AND APPLY NICE FONT AND SUBMIT ON ENTER - REMEMBER TO SWITCH TO TESTING BRANCH
 
 export default function Chat(props: Props) {
     const [isLoading, setIsLoading] = useState(false)
