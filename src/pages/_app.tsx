@@ -8,7 +8,7 @@ import Head from "next/head";
 import { type ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const nonAuthPaths = ["/public", "/api/auth", "/"]
+const nonAuthPaths = ["/public", "/api/auth"]
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
