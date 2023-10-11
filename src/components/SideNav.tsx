@@ -30,7 +30,7 @@ const SideNav = () => {
                 )}
             </ul>
             <div className=" border-gray-400 text-center pt-5 border-t-2">
-                <Button onClick={() => signOut()}>Logout</Button>
+                <Button onClick={() => void signOut()}>Logout</Button>
             </div>
         </nav >
     );
