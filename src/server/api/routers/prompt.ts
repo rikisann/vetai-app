@@ -33,9 +33,10 @@ export const promptRouter = createTRPCRouter({
           },
         },
       );
-      const data = await response.json();
 
-      if (!response.ok) throw new Error(`AI Backend failed! ${data}`);
+      const data = (await response.json()) as { response: string };
+
+      if (!response.ok) throw new Error(`AI Backend failed! ${data.response}`);
 
       console.log(data.response);
 
