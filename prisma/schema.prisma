@@ -68,6 +68,8 @@ model Chat {
     user      User     @relation(fields: [userId], references: [id])
     createdAt DateTime @default(now())
     userId    String
+
+    @@index([userId])
 }
 
 model Prompt {
@@ -77,4 +79,7 @@ model Prompt {
     createdAt DateTime @default(now())
     Chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
     chatId    String
+    indexName String 
+
+    @@index([chatId])
 }

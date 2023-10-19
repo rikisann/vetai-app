@@ -29,11 +29,11 @@ const runLlm = async (question: string, chatHistory = "") => {
         { pineconeIndex }
     );
     console.log(chatHistory)
-    const model = new ChatOpenAI()
+    const model = new ChatOpenAI({ temperature: 0 })
 
-    const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), { returnSourceDocuments: true, questionGeneratorChainOptions: { template: TEMPLATE } })
+    const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever())
 
-    const res = await chain.call({ question, chat_history: "" })
+    const res = await chain.call({ question, chat_history: chatHistory })
 
     return res
 }
