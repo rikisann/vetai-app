@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "./Button";
+import Button from "./UI/Button";
 import { signOut } from "next-auth/react";
 
 import { api } from "~/utils/api";
