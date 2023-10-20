@@ -7,10 +7,8 @@ import SideNav from "~/components/SideNav";
 import Head from "next/head";
 import { type ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Open_Sans } from "next/font/google";
 
 const nonAuthPaths = ["/public", "/api/auth"];
-const openSans = Open_Sans({ subsets: ["latin"], weight: ["400", "500"] });
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -35,7 +33,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="description" content="AI for your veterinary needs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={`flex bg-gray-600 text-white ${openSans.className}`}>
+      <div className="flex bg-gray-600 text-white">
         {pathInNonAuthPaths ? (
           MainComponent
         ) : (
