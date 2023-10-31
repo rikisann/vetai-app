@@ -84,7 +84,7 @@ export default function Input({
             style={{ height: 0 }}
             ref={inputRef}
             value={props.value ?? inputValue}
-            className={`resize-none overflow-hidden rounded-md bg-black px-4 py-4 text-white drop-shadow-2xl focus:outline-none ${className}`}
+            className={`resize-none overflow-hidden rounded-md bg-black px-4 py-4 text-white drop-shadow-2xl focus:outline-none disabled:cursor-wait ${className}`}
             onChange={updateInputValue}
         />
     );

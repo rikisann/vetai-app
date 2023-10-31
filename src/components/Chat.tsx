@@ -109,8 +109,10 @@ export default function Chat(props: Props) {
           className="w-full"
           placeholder="Send a message"
           formRef={formRef}
+          disabled={isLoading}
         />
         <button
+          disabled={isLoading}
           type="submit"
           className="px-3 pr-7 text-xl transition-colors duration-200 hover:cursor-pointer hover:text-gray-500 md:text-2xl"
         >

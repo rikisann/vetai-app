@@ -73,13 +73,24 @@ model Chat {
 }
 
 model Prompt {
-    id        String   @id @default(uuid())
-    question  String
-    response  String
-    createdAt DateTime @default(now())
-    Chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
-    chatId    String
-    indexName String 
+    id              String            @id @default(uuid())
+    question        String
+    response        String
+    createdAt       DateTime          @default(now())
+    Chat            Chat              @relation(fields: [chatId], references: [id], onDelete: Cascade)
+    chatId          String
+    indexName       String
+    sourceDocuments SourceDocuments[]
 
     @@index([chatId])
+}
+
+model SourceDocuments {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    source    String
+    page      Int?
+    content   String
+    prompt    Prompt   @relation(fields: [promptId], references: [id], onDelete: Cascade)
+    promptId  String
 }
