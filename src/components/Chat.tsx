@@ -30,7 +30,7 @@ export default function Chat(props: Props) {
     },
   });
   const createPromptTrpc = api.prompt.create.useMutation({
-    onSuccess: (response: string | undefined) => response,
+    onSuccess: (response: string | null) => response,
   });
 
   const createChat = async (question: string) => {
