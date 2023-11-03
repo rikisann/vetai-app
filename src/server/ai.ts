@@ -12,23 +12,23 @@ await client.init({
 });
 const pineconeIndex = client.Index(env.PINECONE_INDEX_NAME);
 
-const TEMPLATE = `
-You are an expert veterinary equipped with all the knowledge about animals.
-Answer the provided question to the best of your abilities with true and factual information. 
-Use three sentences maximum (unless stated otherwise in the question) and keep the answer as concise as possible.
+// const TEMPLATE = `
+// You are an expert veterinary equipped with all the knowledge about animals.
+// Answer the provided question to the best of your abilities with true and factual information. 
+// Use three sentences maximum (unless stated otherwise in the question) and keep the answer as concise as possible.
 
-Context:{context}
+// Context:{context}
 
-Chat history: {chat_history}
-Question: {question}
-Helpful Answer:`
+// Chat history: {chat_history}
+// Question: {question}
+// Helpful Answer:`
 
 const runLlm = async (question: string, chatHistory = "") => {
     const vectorStore = await PineconeStore.fromExistingIndex(
         new OpenAIEmbeddings(),
         { pineconeIndex }
     );
-    
+
     const model = new ChatOpenAI({ temperature: 0 })
 
     const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever())
