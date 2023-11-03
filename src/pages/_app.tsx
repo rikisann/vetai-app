@@ -41,7 +41,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'GA_MEASUREMENT_ID');
+        gtag('config', '${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
         `}
       </Script>
       <Head>
