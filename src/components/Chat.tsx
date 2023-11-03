@@ -56,7 +56,7 @@ export default function Chat(props: Props) {
 
     if (!chatId.current) await createChat(value);
 
-    const response: string = await createPromptTrpc.mutateAsync({
+    const response: string | null = await createPromptTrpc.mutateAsync({
       question: value,
       chatId: chatId.current!,
       chatHistory,
