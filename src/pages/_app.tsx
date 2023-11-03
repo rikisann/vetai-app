@@ -7,6 +7,8 @@ import SideNav from "~/components/SideNav";
 import Head from "next/head";
 import { type ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Script from "next/script";
+import { env } from "~/env.mjs";
 
 const nonAuthPaths = ["/public", "/api/auth"];
 
@@ -32,6 +34,20 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <title>VetAI</title>
         <meta name="description" content="AI for your veterinary needs" />
         <link rel="icon" href="/favicon.ico" />
+        <Script
+          strategy="lazyOnload"
+          src={`https://www.googletagmanager.com/gtag/js?id=${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 0
+            }`}
+        />
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'GA_MEASUREMENT_ID');
+        `}
+        </Script>
       </Head>
       <div className="flex bg-gray-600 text-white">
         {pathInNonAuthPaths ? (
