@@ -30,24 +30,24 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <Head>
-        <title>VetAI</title>
-        <meta name="description" content="AI for your veterinary needs" />
-        <link rel="icon" href="/favicon.ico" />
-        <Script
-          strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 0
-            }`}
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 0
+          }`}
+      />
+      <Script id="google-analytics" strategy="lazyOnload">
+        {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
         gtag('config', 'GA_MEASUREMENT_ID');
         `}
-        </Script>
+      </Script>
+      <Head>
+        <title>VetAI</title>
+        <meta name="description" content="AI for your veterinary needs" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex bg-gray-600 text-white">
         {pathInNonAuthPaths ? (
