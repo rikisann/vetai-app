@@ -6,16 +6,16 @@ import {
 } from "~/server/api/trpc";
 import { env } from "~/env.mjs";
 import runLlm from "~/server/ai";
+import { ChainValues } from "langchain/dist/schema";
 
 interface SourceDocuments {
-  content: string,
-  page: number,
-  source: string
+  pageContent: string,
+  metadata: { page: number, source: string }
 }
 
 interface AIResponse {
-  response: string,
-  source_documents: SourceDocuments[]
+  responseText: string,
+  sourceDocuments: SourceDocuments[]
 }
 
 export const promptRouter = createTRPCRouter({
@@ -35,22 +35,26 @@ export const promptRouter = createTRPCRouter({
 
         const response = await runLlm(question, formmatedChatHistory)
 
+        const responseText = response.text as string
+
+        const sourceDocs = response.sourceDocuments as SourceDocuments[]
+
         // CREATE NEW PROMPT WITH RESPONSE
         await ctx.db.prompt.create({
           data: {
             question,
-            response: response.text ?? "",
+            response: responseText ?? "",
             chatId,
             indexName: env.PINECONE_INDEX_NAME,
             sourceDocuments: {
               createMany: {
-                data: response.sourceDocuments.map((doc: { pageContent: string, metadata: { page: number, source: string } }) => ({ content: doc.pageContent, ...doc.metadata }))
+                data: sourceDocs.map((doc: { pageContent: string, metadata: { page: number, source: string } }) => ({ content: doc.pageContent, ...doc.metadata }))
               }
             }
           },
         });
 
-        return response.text;
+        return responseText;
       } catch (e) {
         console.log(e)
         return null
