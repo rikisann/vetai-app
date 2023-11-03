@@ -23,7 +23,7 @@ const pineconeIndex = client.Index(env.PINECONE_INDEX_NAME);
 // Question: {question}
 // Helpful Answer:`
 
-const runLlm = async (question: string, chatHistory = "") => {
+const runLlm = async (question: string, chatHistory: string = "") => {
     const vectorStore = await PineconeStore.fromExistingIndex(
         new OpenAIEmbeddings(),
         { pineconeIndex }
@@ -31,9 +31,11 @@ const runLlm = async (question: string, chatHistory = "") => {
 
     const model = new ChatOpenAI({ temperature: 0 })
 
-    const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever())
+    const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), { returnSourceDocuments: true })
 
     const res = await chain.call({ question, "chat_history": chatHistory })
+
+    console.log(res)
 
     return res
 }
