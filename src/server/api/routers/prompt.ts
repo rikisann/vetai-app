@@ -1,21 +1,21 @@
-import { unknown, z } from "zod";
+import { z } from "zod";
 import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
 import { env } from "~/env.mjs";
-import runLlm from "~/server/ai";
-import { ChainValues } from "langchain/dist/schema";
+
 
 interface SourceDocuments {
-  pageContent: string,
-  metadata: { page: number, source: string }
+  content: string,
+  page: number,
+  source: string
 }
 
 interface AIResponse {
-  responseText: string,
-  sourceDocuments: SourceDocuments[]
+  response: string,
+  source_documents: SourceDocuments[]
 }
 
 export const promptRouter = createTRPCRouter({
@@ -46,7 +46,7 @@ export const promptRouter = createTRPCRouter({
           },
         );
 
-        const data = await response.json()
+        const data = await response.json() as AIResponse
 
         // CREATE NEW PROMPT WITH RESPONSE
         await ctx.db.prompt.create({
