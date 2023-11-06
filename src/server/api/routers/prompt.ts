@@ -31,30 +31,39 @@ export const promptRouter = createTRPCRouter({
     )
     .mutation(async ({ input: { question, chatId, chatHistory }, ctx }) => {
       try {
-        const formmatedChatHistory = chatHistory?.reduce((acc, { question, response }) => acc += `Human:${question}\nAI:${response}`, "")
+        const response = await fetch(
+          env.NODE_ENV === "development" ? "http://127.0.0.1:8000/prompt" : "https://backend-ai-fastapi.vercel.app/prompt",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              question: question,
+              ...((chatHistory && chatHistory?.length >= 1) && { "chat_history": chatHistory }), // conditionally include the chat_history argument
+            }),
+            headers: {
+              "x-api-key": env.AI_BACKEND_API_KEY,
+              "Content-Type": "application/json",
+            },
+          },
+        );
 
-        const response = await runLlm(question, formmatedChatHistory)
-
-        const responseText = response.text as string
-
-        const sourceDocs = response.sourceDocuments as SourceDocuments[]
+        const data = await response.json()
 
         // CREATE NEW PROMPT WITH RESPONSE
         await ctx.db.prompt.create({
           data: {
             question,
-            response: responseText ?? "",
+            response: data.response ?? "",
             chatId,
             indexName: env.PINECONE_INDEX_NAME,
             sourceDocuments: {
               createMany: {
-                data: sourceDocs.map((doc: { pageContent: string, metadata: { page: number, source: string } }) => ({ content: doc.pageContent, ...doc.metadata }))
+                data: data.source_documents
               }
             }
           },
         });
 
-        return responseText;
+        return data.response;
       } catch (e) {
         console.log(e)
         return null
@@ -62,18 +71,3 @@ export const promptRouter = createTRPCRouter({
     }),
 });
 
-// const response = await fetch(
-//   env.NODE_ENV === "development" ? "http://127.0.0.1:5000/prompt" : "https://flask-hello-world-murex-delta.vercel.app/prompt",
-//   {
-//     method: "POST",
-//     body: JSON.stringify({
-//       question: question,
-//       chat_history:
-//         !chatHistory || chatHistory?.length < 1 ? "" : chatHistory,
-//     }),
-//     headers: {
-//       "x-api-key": env.AI_BACKEND_API_KEY,
-//       "Content-Type": "application/json",
-//     },
-//   },
-// );
