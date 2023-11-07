@@ -41,6 +41,8 @@ export const env = createEnv({
     PINECONE_ENVIRONMENT_REGION: z.string(),
     PINECONE_INDEX_NAME: z.string(),
     AI_BACKEND_API_KEY: z.string(),
+    GOOGLE_CLIENT_ID: z.string(),
+    GOOGLE_CLIENT_SECRET: z.string()
   },
 
   /**
@@ -74,7 +76,9 @@ export const env = createEnv({
     PINECONE_ENVIRONMENT_REGION: process.env.PINECONE_ENVIRONMENT_REGION,
     PINECONE_INDEX_NAME: process.env.PINECONE_INDEX_NAME,
     AI_BACKEND_API_KEY: process.env.AI_BACKEND_API_KEY,
-    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
