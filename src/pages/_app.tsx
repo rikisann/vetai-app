@@ -3,6 +3,7 @@ import { SessionProvider, signIn, useSession } from "next-auth/react";
 import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
+
 import SideNav from "~/components/SideNav";
 import Head from "next/head";
 import { type ReactNode, useEffect } from "react";
@@ -22,8 +23,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
     pathname.startsWith(path),
   );
 
+
   const MainComponent = (
-    <div className="container mx-auto min-h-screen flex-grow">
+    <div className="flex-grow mx-auto overflow-y-auto">
       <Component {...pageProps} />
     </div>
   );
@@ -49,7 +51,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="description" content="AI for your veterinary needs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex bg-gray-600 text-white">
+      <div className="flex bg-gray-600 min-h-screen max-h-screen text-white relative">
         {pathInNonAuthPaths ? (
           MainComponent
         ) : (

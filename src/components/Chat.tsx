@@ -72,7 +72,7 @@ export default function Chat(props: Props) {
   };
 
   const messagesComponent = (
-    <ul className="mt-3 flex flex-col">
+    <ul className="mt-16 md:mt-3 flex flex-col">
       {chatHistory.map(({ question, response }) => {
         idCounter++;
 
@@ -95,12 +95,12 @@ export default function Chat(props: Props) {
       )}
       {isLoading && <LoadingSpinner />}
       {chatHistory.length !== 0 && (
-        <div className="w-7/12 pb-[20vh]">{messagesComponent}</div>
+        <div className="w-10/12 md:w-7/12 pb-[20vh]">{messagesComponent}</div>
       )}
       <form
         ref={formRef}
         onSubmit={(e) => void formSubmitHandler(e)}
-        className="fixed bottom-10 flex w-6/12 items-center gap-2 rounded-md bg-black"
+        className="fixed bottom-10 flex w-11/12 md:w-6/12 items-center gap-2 rounded-md bg-black"
       >
         <Input
           required
