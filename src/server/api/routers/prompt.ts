@@ -32,7 +32,7 @@ export const promptRouter = createTRPCRouter({
     .mutation(async ({ input: { question, chatId, chatHistory }, ctx }) => {
       try {
         const response = await fetch(
-          env.NODE_ENV === "development" ? "http://127.0.0.1:8000/prompt" : "https://backend-ai-fastapi.vercel.app/prompt",
+          "https://backend-ai-fastapi.vercel.app/prompt",
           {
             method: "POST",
             body: JSON.stringify({
