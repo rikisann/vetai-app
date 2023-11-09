@@ -25,7 +25,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
 
   const MainComponent = (
-    <div className="flex-grow mx-auto overflow-y-auto">
+    <div className="flex-grow mx-auto overflow-y-auto h-full">
       <Component {...pageProps} />
     </div>
   );
