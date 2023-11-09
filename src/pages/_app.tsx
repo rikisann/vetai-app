@@ -25,7 +25,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
 
   const MainComponent = (
-    <div className="flex-grow mx-auto overflow-y-auto">
+    <div className="flex-grow mx-auto">
       <Component {...pageProps} />
     </div>
   );
@@ -51,7 +51,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="description" content="AI for your veterinary needs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex bg-gray-600 min-h-screen text-white relative">
+      <div className="flex bg-gray-600 min-h-screen max-h-screen text-white relative">
         {pathInNonAuthPaths ? (
           MainComponent
         ) : (
