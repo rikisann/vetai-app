@@ -47,11 +47,7 @@ export const promptRouter = createTRPCRouter({
           },
         );
 
-        console.log(response.ok, response.status)
-
-        console.log(response)
-
-        const data = await response.json().catch((err) => console.log(err.message, "🌟🌟🌟🌟")) as AIResponse
+        const data = await response.json() as AIResponse
 
         // CREATE NEW PROMPT WITH RESPONSE
         await ctx.db.prompt.create({
