@@ -87,7 +87,7 @@ export default function Chat(props: Props) {
   );
 
   return (
-    <div className="relative flex h-full flex-col items-center text-center">
+    <div className=" flex flex-col items-center text-center">
       {chatHistory.length === 0 && !isLoading && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <p className="text-3xl text-gray-400">New chat</p>
@@ -100,7 +100,7 @@ export default function Chat(props: Props) {
       <form
         ref={formRef}
         onSubmit={(e) => void formSubmitHandler(e)}
-        className="fixed bottom-10 flex w-11/12 md:w-6/12 items-center gap-2 rounded-md bg-black"
+        className="fixed bottom-5 md:bottom-10 flex w-11/12 md:w-6/12 items-center gap-2 rounded-md bg-black"
       >
         <Input
           required

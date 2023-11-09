@@ -25,7 +25,7 @@ const SideNav = () => {
 
 
     return (
-        <div className="flex relative">
+        <div>
             <nav className={`text-gray-200 z-50 md:static absolute top-0 px-3 py-4 flex-col justify-between h-full bg-neutral-700 w-60 ${hideSideNav ? "hidden" : "flex"}`}>
                 <ul className="flex gap-6 flex-col whitespace-nowrap">
                     <div className="flex justify-between gap-4 pr-1">
@@ -53,7 +53,7 @@ const SideNav = () => {
                 </div>
             </nav >
             <ToggleNavBtn className={`absolute z-10 mt-8 ml-8 self-start ${!hideSideNav && "hidden"}`} setHideSideNav={setHideSideNav} />
-        </div >
+        </div>
     );
 }
 
