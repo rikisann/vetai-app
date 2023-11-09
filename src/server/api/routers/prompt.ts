@@ -32,9 +32,10 @@ export const promptRouter = createTRPCRouter({
     .mutation(async ({ input: { question, chatId, chatHistory }, ctx }) => {
       try {
         const response = await fetch(
-          "https://backend-ai-fastapi.vercel.app/prompt",
+          "https://vetai.onrender.com/prompt",
           {
             method: "POST",
+
             body: JSON.stringify({
               question: question,
               ...((chatHistory && chatHistory?.length >= 1) && { "chat_history": chatHistory }), // conditionally include the chat_history argument
@@ -46,7 +47,11 @@ export const promptRouter = createTRPCRouter({
           },
         );
 
-        const data = await response.json() as AIResponse
+        console.log(response.ok, response.status)
+
+        console.log(response)
+
+        const data = await response.json().catch((err) => console.log(err.message, "🌟🌟🌟🌟")) as AIResponse
 
         // CREATE NEW PROMPT WITH RESPONSE
         await ctx.db.prompt.create({

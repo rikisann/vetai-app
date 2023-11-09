@@ -95,7 +95,7 @@ export default function Chat(props: Props) {
       )}
       {isLoading && <LoadingSpinner />}
       {chatHistory.length !== 0 && (
-        <div className="w-10/12 md:w-7/12 pb-[20vh]">{messagesComponent}</div>
+        <div className="w-11/12 md:w-7/12 pb-[20vh]">{messagesComponent}</div>
       )}
       <form
         ref={formRef}
