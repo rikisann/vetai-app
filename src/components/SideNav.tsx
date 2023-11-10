@@ -25,8 +25,8 @@ const SideNav = () => {
 
 
     return (
-        <div>
-            <nav className={`text-gray-200 z-50 md:static absolute top-0 px-3 py-4 flex-col justify-between h-full bg-neutral-700 w-60 ${hideSideNav ? "hidden" : "flex"}`}>
+        <div className="flex relative">
+            <nav className={`text-gray-200 max-h-screen z-50 md:static fixed top-0 px-3 py-4 flex-col justify-between h-full bg-neutral-700 w-60 ${hideSideNav ? "hidden" : "flex"}`}>
                 <ul className="flex gap-6 flex-col whitespace-nowrap">
                     <div className="flex justify-between gap-4 pr-1">
                         <Link onClick={() => hideSideNavSmallScreens()} className="text-center flex-grow bg-gray-600 hover:bg-gray-400 transition-colors duration-200 hover:text-black" href="/">
@@ -37,7 +37,7 @@ const SideNav = () => {
                     {(chats?.length === 0 || !chats) && <p className="whitespace-normal text-gray-300">Start a new chat by sending a message!</p>}
                     {chats?.length !== 0 && chats?.map(({ id, name }) =>
                         <li key={id}>
-                            <Link className="flex items-center gap-4" href={`/chat/${id}`}>
+                            <Link onClick={() => hideSideNavSmallScreens()} className="flex items-center gap-4" href={`/chat/${id}`}>
                                 <div>
                                     <BsChatRightText />
                                 </div>
@@ -52,7 +52,9 @@ const SideNav = () => {
                     <Button onClick={() => void signOut()}>Logout</Button>
                 </div>
             </nav >
-            <ToggleNavBtn className={`absolute z-10 mt-8 ml-8 self-start ${!hideSideNav && "hidden"}`} setHideSideNav={setHideSideNav} />
+            <div className="fixed z-10 mt-8 ml-8 self-start text-black">
+                <ToggleNavBtn className={`sticky ${!hideSideNav && "hidden"}`} setHideSideNav={setHideSideNav} />
+            </div>
         </div>
     );
 }
