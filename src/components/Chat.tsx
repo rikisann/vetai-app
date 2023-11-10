@@ -87,7 +87,7 @@ export default function Chat(props: Props) {
   );
 
   return (
-    <div className=" flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center">
       {chatHistory.length === 0 && !isLoading && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <p className="text-3xl text-gray-400">New chat</p>
